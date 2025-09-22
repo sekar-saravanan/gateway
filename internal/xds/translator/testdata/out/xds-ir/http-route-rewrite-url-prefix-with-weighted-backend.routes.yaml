@@ -10,6 +10,10 @@
       name: first-route
       route:
         clusterNotFoundResponseCode: INTERNAL_SERVER_ERROR
+        regexRewrite:
+          pattern:
+            regex: ^/bar\/*
+          substitution: /
         upgradeConfigs:
         - upgradeType: websocket
         weightedClusters:
@@ -23,10 +27,14 @@
             weight: 1
           prefixRewrite: /
     - match:
-        prefix: /
+        pathSeparatedPrefix: /bar
       name: second-route
       route:
         clusterNotFoundResponseCode: INTERNAL_SERVER_ERROR
+        regexRewrite:
+          pattern:
+            regex: ^/bar\/*
+          substitution: /
         upgradeConfigs:
         - upgradeType: websocket
         weightedClusters:
@@ -42,4 +50,3 @@
             weight: 8
           - name: second-route-dest/backend/1
             weight: 2
-          prefixRewrite: /
