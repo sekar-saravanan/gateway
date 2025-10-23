@@ -136,7 +136,7 @@ func extAuthConfig(extAuth *ir.ExtAuth) *extauthv3.ExtAuthz {
 					EnvoyGrpc: grpcService(extAuth.GRPC),
 				},
 				Timeout: &durationpb.Duration{
-					Seconds: defaultExtServiceRequestTimeout,
+					Nanos: 500000000,
 				},
 			},
 		}
